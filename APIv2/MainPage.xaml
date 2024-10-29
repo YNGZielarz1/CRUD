@@ -1,0 +1,90 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APIv2.MainPage"
+             BackgroundColor="#ffffff">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Dodaj nowego użytkownika" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333"/>
+
+            <Label Text="Podaj ID:"/>
+            <Entry x:Name="idEntry" Placeholder="np. 1" Keyboard="Numeric" Margin="0,0,0,10"/>
+
+            <Label Text="Podaj nazwę środka trwałego:"/>
+            <Entry x:Name="nameEntry" Placeholder="np. Laptop Dell XS" Margin="0,0,0,10"/>
+
+            <Label Text="Podaj miejsce:"/>
+            <Entry x:Name="placeEntry" Placeholder="np. Biuro pokój 101" Margin="0,0,0,10"/>
+
+            <Label Text="Podaj lokalizację:"/>
+            <Entry x:Name="locationEntry" Placeholder="np. Warszawa" Margin="0,0,0,10"/>
+
+            <Label Text="Podaj osobę odpowiedzialną:"/>
+            <Entry x:Name="responsiblePersonEntry" Placeholder="np. Jan Kowalski" Margin="0,0,0,20"/>
+
+            <Grid Padding="0" HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Dodaj użytkownika" Grid.Column="0" BackgroundColor="#0fe300" Margin="5" Clicked="OnAddUserClicked"/>
+                <Button Text="Wyświetl listę" Grid.Column="1" BackgroundColor="#fcba03" Margin="5" Clicked="OnGetUsersClicked"/>
+                <Button Text="Wyświetl użytkownika" Grid.Column="2" BackgroundColor="#fcba03" Margin="5" Clicked="OnGetUserClicked"/>
+               
+            </Grid>
+
+            <Frame x:Name="userDetailsFrame" BackgroundColor="#f9f9f9" CornerRadius="10" Padding="10" Margin="0,5" IsVisible="False">
+                <StackLayout Orientation="Vertical" Spacing="5">
+                    <Label x:Name="userIdLabel" FontAttributes="Bold" TextColor="#2196F3" FontSize="Medium"/>
+                    <Label x:Name="userNameLabel" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label x:Name="userPlaceLabel" FontSize="Small" TextColor="Gray"/>
+                    <Label x:Name="userLocationLabel" FontSize="Small" TextColor="Gray"/>
+                    <Label x:Name="userResponsiblePersonLabel" FontSize="Small" TextColor="Gray"/>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                        <Button x:Name="editUserButton" Text="Edytuj" WidthRequest="150" BackgroundColor="#fcba03" Clicked="OnEditUserClicked"/>
+                        <Button x:Name="deleteUserButton" Text="Usuń" WidthRequest="150" BackgroundColor="#d92414" Clicked="OnDeleteUserClickedFromDetails"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Frame>
+
+            <CollectionView x:Name="usersCollectionView" ItemsSource="{Binding}" Margin="0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" CornerRadius="10" BackgroundColor="#f9f9f9" HasShadow="True">
+                            <StackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ID:" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Id}" FontAttributes="Bold" TextColor="#2196F3" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Image Source="laptop.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" TextColor="#333" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Image Source="location_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Place}" FontSize="Small" TextColor="Gray" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Image Source="city_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Location}" FontSize="Small" TextColor="Gray" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Image Source="user.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                    <Label Text="{Binding ResponsiblePerson}" FontSize="Small" TextColor="Gray" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
